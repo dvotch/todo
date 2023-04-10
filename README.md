@@ -1,92 +1,97 @@
-# TODO List
+# Блок 2: TODO List
+Давайте сделаем свой TODO list!
 
+## Задание
 
+Посмотрите пример того, что вам нужно сделать: [Todo List](https://todont.zachmanson.com/)
 
-## Getting started
+Инициализация проекта такая же как и в прошлом блоке, смотрите инструкцию там
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+### Добавьте заголовок
+Добавьте заголовок в начале страницы.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
+### Readonly режим
+1. Создайте модель `todo.model.ts` и компоненту `Todo.tsx` которая будет иметь **название** задачи, **состояние**  задачи (сделана или нет), а так же 2 кнопки: `Edit` и `Delete`.
+2. Создайте компоненту со списком и в ней отобразите несколько `<Todo/>`. Для этого используйте моковые данные:
+```json
+   [
+      {
+         "id": "51c1c4f1-03bf-48bf-9705-9dc97ab61a76",
+         "title": "delectus aut autem",
+         "completed": false
+      },
+      {
+         "id": "62aabce1-8f84-4684-90b9-2b2310cf726a",
+         "title": "quis ut nam facilis et officia qui",
+         "completed": false
+      },
+      {
+         "id": "402ee516-6c72-4d16-a9a8-322069f5cf6e",
+         "title": "fugiat veniam minus",
+         "completed": false
+      },
+      {
+         "id": "3b720eaf-163a-41c8-bc5e-b47f2370cd0c",
+         "title": "et porro tempora",
+         "completed": true
+      },
+      {
+         "id": "3ab57b63-e789-4211-a507-6b89501bc39a",
+         "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
+         "completed": false
+      },
+      {
+         "id": "09d15f18-14ea-4fd3-b75b-e57777c25b3c",
+         "title": "qui ullam ratione quibusdam voluptatem quia omnis",
+         "completed": false
+      },
+      {
+         "id": "46f5bdd5-dc22-441e-b78b-e812d817cfde",
+         "title": "illo expedita consequatur quia in",
+         "completed": false
+      },
+      {
+         "id": "bce9f1e0-4383-40a6-9a10-2f59d9aa1465",
+         "title": "quo adipisci enim quam ut ab",
+         "completed": true
+      },
+      {
+         "id": "05da3453-89e2-4d44-8912-5b727218808c",
+         "title": "molestiae perspiciatis ipsa",
+         "completed": false
+      },
+      {
+         "id": "c7034df3-eb7b-4cad-a323-3f5c6ceb9283",
+         "title": "illo est ratione doloremque quia maiores aut",
+         "completed": true
+      }
+   ]
 ```
-cd existing_repo
-git remote add origin https://git.it-mentor.tech/reactcore/todo-list.git
-git branch -M main
-git push -uf origin main
-```
 
-## Integrate with your tools
+3. Отобразите счётчик **всех** задач над списком. Для этого используйте отдельную компоненту.
 
-- [ ] [Set up project integrations](https://git.it-mentor.tech/reactcore/todo-list/-/settings/integrations)
+### Удаление и Создание Todo
+1. Добавьте возможность удаления элемента из списка по нажатию на кнопку `Delete`. Число в счётчике должно меняться при удалении.
+2. Создайте новую компоненту и добавьте поле ввода текста и кнопку `Add`
+3. При нажатии на кнопку `Add`, если текстовое поле заполнено, создайте новый элемент в списке и обновите счётчик задач. Используйте [uuid](https://www.npmjs.com/package/uuid) для генерации уникального id.
 
-## Collaborate with your team
+### Изменение Todo
+1. Добавьте возможность менять **состояние** задачи (сделана или нет)
+2. Добавьте возможность включать и выключать режим редактирования **Названия** задачи
+    - При клике на кнопку `Edit` Должно появиться текстовое поле и кнопки `Save`/`Cancel`. Кнопки `Edit` и `Delete`, а так же чекбокс состояния должны исчезнуть.
+    - При нажатии на кнопку `Save`, если поле заполнено, название задачи должно измениться. При нажатии на `Cancel`, название задачи должно вернуться в исходное состояние.
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+### Фильтрация Todos
+Добавьте три кнопки фильтрации: `Show All Tasks`, `Show Active Tasks`, `Show completed Tasks`
+- При нажатии на каждую из кнопок список должен меняться соответствующим образом
+- Подсвечивайте активный фильтр
 
-## Test and Deploy
+### Local storage
+1. Добавьте методы, которые будут сохранять в local Storage и читать из него.
+2. Используйте эти методы, чтобы сохранить данные о ваших todo
 
-Use the built-in continuous integration in GitLab.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+## Дополнительные материалы
 
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+1. [React](https://ru.reactjs.org/)
+2. [Styled components](https://habr.com/ru/post/591381/)
