@@ -4,6 +4,7 @@ import { ControlButtons } from './ControlButtons';
 import { Flex } from './UI/Flex';
 import { CheckInput } from './UI/CheckInput';
 import { useStore } from '../models/todo.model';
+import { Model } from 'react-model';
 
 interface Props {
     item: {
@@ -12,24 +13,19 @@ interface Props {
         completed: boolean;
     };
     onChange: React.ChangeEventHandler<HTMLInputElement>;
+    setItems: Function;
 }
-
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    margin-top: 2rem;
-`;
 
 const LabelStyle = styled.label`
     font-size: 1.6rem;
 `;
 
-export const Todo = ({ item, onChange }: Props) => {
+
+export const Todo = ({ item, onChange, setItems }: Props) => {
     return (
         <>
             <LabelStyle>
-                <CheckInput checked={item.completed} onChange={onChange} />
+                <CheckInput checked={item.completed} onChange={() => {}} />
                 {item.title}
             </LabelStyle>
             <ControlButtons />

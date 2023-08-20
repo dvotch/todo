@@ -1,5 +1,6 @@
 import React from 'react';
-import { useModel, createStore } from 'react-model';
+import { Model } from 'react-model';
+import { v4 as uuidv4 } from 'uuid';
 
 const data = [
     {
@@ -55,10 +56,33 @@ const data = [
 ];
 
 // define model
-const useTodo = () => {
-    const [items, setItems] = useModel(data);
-    return { items, setItems };
+interface Todo {
+    id: string;
+    title: string;
+    completed: boolean;
+}
+
+type State = {
+    todos: Todo[];
+    id: string;
 };
 
-// Model Register
-export const { useStore } = createStore(useTodo);
+type ActionParams = {
+    add: string;
+};
+
+const model: ModelType<State, ActionParams> = {
+    state: {
+        todos: data,
+        id: uuidv4(),
+    },
+    actions: {
+        add: title => {
+            return state => {
+                state.todos.push({ title, completed: false, id: uuidv4() });
+            };
+        },
+    },
+};
+
+export const { useStore, actions } = Model({ model });
