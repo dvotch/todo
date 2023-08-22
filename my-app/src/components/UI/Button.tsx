@@ -12,6 +12,7 @@ export const ButtonStyle = styled.button`
     padding: 0.5rem;
     min-width: 5rem;
     color: white;
+    cursor: pointer;
 `;
 
 export const Button = ({ children, onClick }: extendedProps) => {

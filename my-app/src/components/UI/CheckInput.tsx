@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { ChangeEventHandler, MouseEventHandler } from 'react';
 import styled from 'styled-components';
+import { ITodo } from '../../models/todo.model';
 
 interface Props {
     checked: boolean;
-    onChange: React.ChangeEventHandler<HTMLInputElement>;
+    onChange: ChangeEventHandler<HTMLInputElement>;
 }
 
 const CheckInputStyle = styled.input`

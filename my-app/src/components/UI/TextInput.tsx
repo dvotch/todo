@@ -7,7 +7,7 @@ interface Props {
     placeholder: string;
 }
 
-const InputStyle = styled.input`
+export const InputStyle = styled.input`
     border-radius: 0.5rem;
     border: 2px solid #bd93f9;
     padding: 0.5rem;

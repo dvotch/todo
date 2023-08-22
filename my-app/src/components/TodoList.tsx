@@ -1,11 +1,7 @@
 import React from 'react';
-import { useStore } from '../models/todo.model';
 import { Todo } from './Todo';
 import styled from 'styled-components';
-
-interface Props {
-    onChange: React.ChangeEventHandler<HTMLInputElement>;
-}
+import { useTodoStore } from '../store/store';
 
 const LiStyle = styled.li`
     list-style-type: none;
@@ -14,17 +10,16 @@ const LiStyle = styled.li`
 
 const UlStyle = styled.ul`
     padding: 0;
+    position: relative;
 `;
 
-export const TodoList = ({ onChange }: Props) => {
-    const [state] = useStore('model');
-    console.log(state);
-
+export const TodoList = () => {
+    const todos = useTodoStore(state => state.todos);
     return (
         <UlStyle>
-            {state.todos.map(todo => (
+            {todos.map(todo => (
                 <LiStyle key={todo.id}>
-                    <Todo item={todo} onChange={onChange} setItems={() => {}} />
+                    <Todo title={todo.title} completed={todo.completed} id={todo.id} />
                 </LiStyle>
             ))}
         </UlStyle>

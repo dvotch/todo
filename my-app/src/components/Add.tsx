@@ -3,17 +3,20 @@ import styled from 'styled-components';
 import { Flex } from './UI/Flex';
 import { TextInput } from './UI/TextInput';
 import { Button } from './UI/Button';
-import { useStore } from '../models/todo.model';
+import { useTodoStore } from '../store/store';
 
 export const Add = () => {
     const [value, setValue] = useState('');
-    const [,actions] = useStore("model")
+
+    const addTodo = useTodoStore(state => state.addTodo);
+    const editComplete = useTodoStore(state => state.editComplete);
+
     const handlerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
     };
 
     const handlerClick = () => {
-        actions.add(value)
+        addTodo(value);
     };
 
     return (
