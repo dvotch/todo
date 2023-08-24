@@ -8,6 +8,6 @@ const ContainerStyle = styled.section`
     align-items: center;
 `;
 
-export const Container = ({ children }: Props) => {
+export const Container = React.memo(({ children }: Props) => {
     return <ContainerStyle>{children}</ContainerStyle>;
-};
+});

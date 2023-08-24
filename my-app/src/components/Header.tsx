@@ -7,6 +7,7 @@ const HeaderStyle = styled.header`
     font-size: 3rem;
 `;
 
-export const Header = ({ children }: Props) => {
+export const Header = React.memo(({ children }: Props) => {
+    console.log('Header');
     return <HeaderStyle>{children}</HeaderStyle>;
-};
+});

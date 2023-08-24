@@ -12,6 +12,6 @@ const CheckInputStyle = styled.input`
     margin-right: 1.5rem;
 `;
 
-export const CheckInput = ({ checked, onChange }: Props) => {
+export const CheckInput = React.memo(({ checked, onChange }: Props) => {
     return <CheckInputStyle type='checkbox' checked={checked} onChange={onChange} />;
-};
+});

@@ -11,10 +11,10 @@ const TaskRemainingStyle = styled.h2`
     margin-left: -1.4rem;
 `;
 
-export const TaskRemaining = ({ value }: Props) => {
+export const TaskRemaining = React.memo(({ value }: Props) => {
     return (
         <TaskRemainingStyle>
             {value} {value > 1 ? 'tasks' : 'task'} remaining
         </TaskRemainingStyle>
     );
-};
+});

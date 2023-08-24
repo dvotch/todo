@@ -16,11 +16,11 @@ const Flex = styled.div`
     justify-content: space-between;
 `;
 
-export const ControlButtons = ({ edit, handleClickEdit, handleClickSave, handleClickDelete }: Props) => {
+export const ControlButtons = React.memo(({ edit, handleClickEdit, handleClickSave, handleClickDelete }: Props) => {
     return (
         <Flex>
             <Button onClick={handleClickEdit}>{edit ? 'Cancle' : 'Edit'}</Button>
             <Button onClick={edit ? handleClickSave : handleClickDelete}>{edit ? 'Save' : 'Delete'}</Button>
         </Flex>
     );
-};
+});

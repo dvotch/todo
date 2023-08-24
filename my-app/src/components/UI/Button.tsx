@@ -15,10 +15,10 @@ export const ButtonStyle = styled.button`
     cursor: pointer;
 `;
 
-export const Button = ({ children, onClick }: extendedProps) => {
+export const Button = React.memo(({ children, onClick }: extendedProps) => {
     return (
         <ButtonStyle type='button' onClick={onClick}>
             {children}
         </ButtonStyle>
     );
-};
+});

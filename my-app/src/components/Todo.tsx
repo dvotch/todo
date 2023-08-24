@@ -19,7 +19,7 @@ const InputStyled = styled(InputStyle)<{ $edit?: boolean }>`
     display: ${props => (props.$edit ? 'block' : 'none')};
 `;
 
-export const Todo = ({ title, completed, id }: ITodo) => {
+export const Todo = React.memo(({ title, completed, id }: ITodo) => {
     const [stateTitle, setStateTitle] = useState(title);
     const [edit, setEdit] = useState(false);
     const [editComplete, saveEdit, deleteTodo] = useTodoStore(state => [
@@ -28,25 +28,27 @@ export const Todo = ({ title, completed, id }: ITodo) => {
         state.deleteTodo,
     ]);
 
-    const handleClick = () => {
+    const handleClick = React.useCallback(() => {
         editComplete(id);
-    };
-    const handlerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    }, []);
+
+    const handlerChange = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         setStateTitle(event.target.value);
-    };
+    }, []);
 
-    const handleClickEdit = () => {
+    const handleClickEdit = React.useCallback(() => {
         setEdit(edit => !edit);
-    };
+    }, []);
 
-    const handleClickSave = () => {
+    const handleClickSave = React.useCallback(() => {
         saveEdit(id, stateTitle);
         setEdit(edit => !edit);
-    };
+    }, []);
 
-    const handleClickDelete = () => {
+    const handleClickDelete = React.useCallback(() => {
         deleteTodo(id);
-    };
+    }, []);
+    console.log('Todo');
     return (
         <>
             <InputStyled value={stateTitle} onChange={handlerChange} $edit={edit} />
@@ -63,4 +65,4 @@ export const Todo = ({ title, completed, id }: ITodo) => {
             />
         </>
     );
-};
+});

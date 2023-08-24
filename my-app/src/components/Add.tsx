@@ -5,24 +5,24 @@ import { TextInput } from './UI/TextInput';
 import { Button } from './UI/Button';
 import { useTodoStore } from '../store/store';
 
-export const Add = () => {
+export const Add = React.memo(() => {
     const [value, setValue] = useState('');
 
     const addTodo = useTodoStore(state => state.addTodo);
     const editComplete = useTodoStore(state => state.editComplete);
 
-    const handlerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handlerChange = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
-    };
+    }, []);
 
-    const handlerClick = () => {
+    const handlerClick = React.useCallback(() => {
         addTodo(value);
-    };
-
+    }, [value]);
+    console.log('Add');
     return (
         <Flex>
             <TextInput value={value} handlerChange={handlerChange} placeholder='New todo...' />
             <Button onClick={handlerClick}>Add</Button>
         </Flex>
     );
-};
+});

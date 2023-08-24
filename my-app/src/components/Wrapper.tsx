@@ -10,6 +10,7 @@ const WrapperStyle = styled.div`
     max-width: 40rem;
 `;
 
-export const Wrapper = ({ children }: Props) => {
+export const Wrapper = React.memo(({ children }: Props) => {
+    console.log('Wrapper');
     return <WrapperStyle>{children}</WrapperStyle>;
-};
+});

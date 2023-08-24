@@ -3,17 +3,22 @@ import { ITodo } from '../models/todo.model';
 import uuid from 'react-uuid';
 import { data } from '../data/data';
 
+type Filter = 'All' | 'Active' | 'Completed';
+
 interface TodoStore {
     todos: ITodo[];
+    filter: 'All' | 'Active' | 'Completed';
     countTodos: () => number;
     addTodo: (title: string) => void;
     editComplete: (id: string) => void;
     saveEdit: (id: string, title: string) => void;
     deleteTodo: (id: string) => void;
+    setFilter: (filter: Filter) => void;
 }
 
 export const useTodoStore = create<TodoStore>((set, get) => ({
     todos: data,
+    filter: 'All',
     countTodos: () => get().todos.length,
     addTodo: title => {
         return set(state => ({
@@ -34,6 +39,11 @@ export const useTodoStore = create<TodoStore>((set, get) => ({
     deleteTodo: id => {
         return set(state => ({
             todos: state.todos.filter(todo => todo.id !== id),
+        }));
+    },
+    setFilter: filter => {
+        return set(state => ({
+            filter: filter,
         }));
     },
 }));

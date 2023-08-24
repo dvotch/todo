@@ -13,15 +13,24 @@ const UlStyle = styled.ul`
     position: relative;
 `;
 
-export const TodoList = () => {
+export const TodoList = React.memo(() => {
     const todos = useTodoStore(state => state.todos);
+    const filter = useTodoStore(state => state.filter);
+    console.log('TodoList');
     return (
         <UlStyle>
-            {todos.map(todo => (
-                <LiStyle key={todo.id}>
-                    <Todo title={todo.title} completed={todo.completed} id={todo.id} />
-                </LiStyle>
-            ))}
+            {todos
+                .filter(
+                    todo =>
+                        filter === 'All' ||
+                        (filter === 'Active' && !todo.completed) ||
+                        (filter === 'Completed' && todo.completed)
+                )
+                .map(todo => (
+                    <LiStyle key={todo.id}>
+                        <Todo title={todo.title} completed={todo.completed} id={todo.id} />
+                    </LiStyle>
+                ))}
         </UlStyle>
     );
-};
+});

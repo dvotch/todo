@@ -10,6 +10,6 @@ const FlexStyle = styled.div`
     justify-content: space-between;
 `;
 
-export const Flex = ({ children }: Props) => {
+export const Flex = React.memo(({ children }: Props) => {
     return <FlexStyle>{children}</FlexStyle>;
-};
+});

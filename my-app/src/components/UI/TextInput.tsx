@@ -14,6 +14,6 @@ export const InputStyle = styled.input`
     flex: 1 1;
 `;
 
-export const TextInput = ({ value, handlerChange, placeholder }: Props) => {
+export const TextInput = React.memo(({ value, handlerChange, placeholder }: Props) => {
     return <InputStyle type='text' value={value} onChange={handlerChange} placeholder={placeholder} />;
-};
+});
