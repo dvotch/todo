@@ -30,7 +30,7 @@ export const ShowTasks = React.memo(() => {
     return (
         <UlStyle>
             {Filters.map(filter => {
-                const hanler = () => setFilter(filter);
+                const hanler = () => setFilter(filter);// FIXME: вынести из цикла
                 return (
                     <LiStyle key={filter}>
                         <ModifyButton onClick={hanler}>Show {filter} tasks</ModifyButton>

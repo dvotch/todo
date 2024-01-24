@@ -1,11 +1,11 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ControlButtons } from './ControlButtons';
-import { Flex } from './UI/Flex';
 import { CheckInput } from './UI/CheckInput';
 import { ITodo } from '../models/todo.model';
 import { useTodoStore } from '../store/store';
 import { InputStyle } from './UI/TextInput';
+import { shallow } from 'zustand/shallow';
 
 const LabelStyle = styled.label<{ $edit?: boolean }>`
     font-size: 1.6rem;
@@ -22,11 +22,10 @@ const InputStyled = styled(InputStyle)<{ $edit?: boolean }>`
 export const Todo = React.memo(({ title, completed, id }: ITodo) => {
     const [stateTitle, setStateTitle] = useState(title);
     const [edit, setEdit] = useState(false);
-    const [editComplete, saveEdit, deleteTodo] = useTodoStore(state => [
-        state.editComplete,
-        state.saveEdit,
-        state.deleteTodo,
-    ]);
+    const [editComplete, saveEdit, deleteTodo] = useTodoStore(
+        state => [state.editComplete, state.saveEdit, state.deleteTodo],
+        shallow
+    );
 
     const handleClick = React.useCallback(() => {
         editComplete(id);
@@ -38,17 +37,17 @@ export const Todo = React.memo(({ title, completed, id }: ITodo) => {
 
     const handleClickEdit = React.useCallback(() => {
         setEdit(edit => !edit);
-    }, []);
+        setStateTitle(title);
+    }, [title]);
 
     const handleClickSave = React.useCallback(() => {
         saveEdit(id, stateTitle);
         setEdit(edit => !edit);
-    }, []);
+    }, [stateTitle]);
 
     const handleClickDelete = React.useCallback(() => {
         deleteTodo(id);
     }, []);
-    console.log('Todo');
     return (
         <>
             <InputStyled value={stateTitle} onChange={handlerChange} $edit={edit} />

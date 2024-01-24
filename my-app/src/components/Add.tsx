@@ -9,14 +9,16 @@ export const Add = React.memo(() => {
     const [value, setValue] = useState('');
 
     const addTodo = useTodoStore(state => state.addTodo);
-    const editComplete = useTodoStore(state => state.editComplete);
 
     const handlerChange = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
     }, []);
 
     const handlerClick = React.useCallback(() => {
-        addTodo(value);
+        if (value) {
+            addTodo(value);
+            setValue('');
+        }
     }, [value]);
     console.log('Add');
     return (

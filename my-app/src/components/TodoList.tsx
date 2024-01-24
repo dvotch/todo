@@ -16,16 +16,12 @@ const UlStyle = styled.ul`
 export const TodoList = React.memo(() => {
     const todos = useTodoStore(state => state.todos);
     const filter = useTodoStore(state => state.filter);
-    console.log('TodoList');
+    const isMatchFilter = (todo: any) =>
+        filter === 'All' || (filter === 'Active' && !todo.completed) || (filter === 'Completed' && todo.completed);
     return (
         <UlStyle>
             {todos
-                .filter(
-                    todo =>
-                        filter === 'All' ||
-                        (filter === 'Active' && !todo.completed) ||
-                        (filter === 'Completed' && todo.completed)
-                )
+                .filter(todo => isMatchFilter(todo))
                 .map(todo => (
                     <LiStyle key={todo.id}>
                         <Todo title={todo.title} completed={todo.completed} id={todo.id} />

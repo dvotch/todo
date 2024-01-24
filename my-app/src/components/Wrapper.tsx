@@ -11,6 +11,5 @@ const WrapperStyle = styled.div`
 `;
 
 export const Wrapper = React.memo(({ children }: Props) => {
-    console.log('Wrapper');
     return <WrapperStyle>{children}</WrapperStyle>;
 });
